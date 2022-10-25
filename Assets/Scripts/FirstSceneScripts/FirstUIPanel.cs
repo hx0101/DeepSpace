@@ -6,8 +6,8 @@ public class FirstUIPanel : MonoBehaviour
 {
     public void StartGame()
     {
-        HardScene hardScene = new HardScene();
-        SceneControl.GetInstance().LoadScene(hardScene.SceneName,hardScene);
+        GameSelect gameSelect = new GameSelect();
+        LoadManager.Instance.LoadNextLevel(gameSelect.SceneName, gameSelect);
     }
 
     public void ExitGame()

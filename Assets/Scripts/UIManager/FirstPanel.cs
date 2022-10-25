@@ -13,14 +13,9 @@ public class FirstPanel : BasePanel
 
     }
 
-    public override void OnDestroy()
+    public override void OnStart()
     {
-        base.OnDestroy();
-    }
-
-    public override void OnDisable()
-    {
-        base.OnDisable();
+        base.OnStart();
     }
 
     public override void OnEnable()
@@ -28,13 +23,18 @@ public class FirstPanel : BasePanel
         base.OnEnable();
     }
 
-    public override void OnStart()
-    {
-        base.OnStart();
-    }
-
     public override void OnUpdate()
     {
         base.OnUpdate();
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
     }
 }

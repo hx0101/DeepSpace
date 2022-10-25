@@ -12,6 +12,8 @@ TagManager:
   - MainCanvas
   - UIImageManager
   - Light
+  - MianCanvas
+  - SelectPanel
   layers:
   - Default
   - TransparentFX
