@@ -16,6 +16,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("成功");
 
+        //进入游戏大厅
+        PhotonNetwork.JoinLobby();
+
         PhotonNetwork.JoinOrCreateRoom("Room", new Photon.Realtime.RoomOptions() { MaxPlayers = 4 }, default);
     }
 

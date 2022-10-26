@@ -60,6 +60,7 @@ public class SceneControl
 
     public IEnumerator LoadLevel(string scene_name, SceneBase sceneBase, BasePanel basePanel)
     {
+        UIManager.GetInstance().Pop(true);
         UIManager.GetInstance().Push(basePanel);
         Text text = UIMethod.GetInstance().GetOrAddSingleComponentInChild<Text>(basePanel.ActiveObj, "LoadText");
         Slider slider = UIMethod.GetInstance().GetOrAddSingleComponentInChild<Slider>(basePanel.ActiveObj, "LoadSlider");
@@ -69,14 +70,7 @@ public class SceneControl
             dict_scene.Add(scene_name, sceneBase);
         }
 
-        if (dict_scene.ContainsKey(SceneManager.GetActiveScene().name))
-        {
-            dict_scene[SceneManager.GetActiveScene().name].ExitScene();
-        }
-        else
-        {
-            Debug.LogWarning($"SceneControl的字典中不包含{SceneManager.GetActiveScene().name}!");
-        }
+        
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene_name);
 

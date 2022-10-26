@@ -89,9 +89,15 @@ public class UIManager
             }
         }
 
-        basePanel.OnStart();
+        Corange corange = GameObject.FindWithTag("Co-range").gameObject.GetComponent<Corange>();
+        corange.StartCoroutine(OnStartF(basePanel));
     }
 
+    IEnumerator OnStartF(BasePanel basePanel)
+    {
+        yield return new WaitForSeconds(1f);
+        basePanel.OnStart();
+    }
     /// <summary>
     /// 出栈
     /// </summary>
