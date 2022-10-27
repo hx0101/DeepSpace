@@ -16,6 +16,8 @@ TagManager:
   - SelectPanel
   - RoomlistPanel
   - Co-range
+  - NetworkLauncher
+  - RoomListOne
   layers:
   - Default
   - TransparentFX

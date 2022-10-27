@@ -18,7 +18,9 @@ public class SelectPanel : BasePanel
     Button compete;
     Button cooperate;
 
-    SelectPanelTransform selectPanelTransform; 
+    SelectPanelTransform selectPanelTransform;
+
+    Launcher launcher;
     public SelectPanel() : base(uIType)
     {
 
@@ -28,6 +30,8 @@ public class SelectPanel : BasePanel
     {
         base.OnStart();
         selectPanelTransform = GameObject.FindWithTag("SelectPanel").gameObject.GetComponent<SelectPanelTransform>();
+
+        launcher = GameObject.FindWithTag("NetworkLauncher").gameObject.GetComponent<Launcher>();
 
         single = UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Single");
         multiple = UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Multiple");
@@ -105,6 +109,7 @@ public class SelectPanel : BasePanel
 
     void Compete()
     {
+        launcher.GetCompeteButtonDown();
         if (simple.enabled)
         {
             selectPanelTransform.DifficultyExitGet();
@@ -123,13 +128,15 @@ public class SelectPanel : BasePanel
 
     IEnumerator LoadRoomlistPanel()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.8f);
         UIManager.GetInstance().Push(new RoomlistPanel());
+        yield return new WaitForSeconds(0.1f);
+        launcher.PlayerEnterLobby();
     }
+
     public override void OnEnable()
     {
         base.OnEnable();
-        selectPanelTransform.AOrTogetherEnterGet();
     }
 
     public override void OnUpdate()
@@ -139,11 +146,11 @@ public class SelectPanel : BasePanel
 
     public override void OnDisable()
     {
-        
+        base.OnDisable();
     }
 
     public override void OnDestroy()
     {
-        
+        base.OnDestroy();
     }
 }

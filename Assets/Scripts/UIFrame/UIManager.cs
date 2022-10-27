@@ -89,13 +89,14 @@ public class UIManager
             }
         }
 
-        Corange corange = GameObject.FindWithTag("Co-range").gameObject.GetComponent<Corange>();
-        corange.StartCoroutine(OnStartF(basePanel));
+        basePanel.OnStart();
+        //Corange corange = GameObject.FindWithTag("Co-range").gameObject.GetComponent<Corange>();
+        //corange.StartCoroutine(OnStartF(basePanel));
     }
 
     IEnumerator OnStartF(BasePanel basePanel)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         basePanel.OnStart();
     }
     /// <summary>
