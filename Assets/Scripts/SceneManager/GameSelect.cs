@@ -9,6 +9,7 @@ public class GameSelect : SceneBase
     public override void EnterScene()
     {
         SelectPanel selectPanel = new SelectPanel();
+        selectPanel.loadGameModel = true;
         LoadManager.Instance.LoadNextPanel(selectPanel);
     }
 

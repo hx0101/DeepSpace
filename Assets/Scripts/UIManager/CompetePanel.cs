@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using TMPro;
 
 public class CompetePanel : BasePanel
 {
@@ -18,9 +20,18 @@ public class CompetePanel : BasePanel
     public override void OnStart()
     {
         base.OnStart();
-        launcher = GameObject.FindWithTag("NetwordLauncher").gameObject.GetComponent<Launcher>();
+        launcher = GameObject.FindWithTag("NetworkLauncher").gameObject.GetComponent<Launcher>();
 
-        UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Start").onClick.AddListener(Start);
+        Button start = UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Start");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            start.onClick.AddListener(Start);
+        }
+        else
+        {
+            start.GetComponentInChildren<TMP_Text>().alpha = 0.5f;
+            start.enabled = false;
+        }
         UIMethod.GetInstance().GetOrAddSingleComponentInChild<Button>(ActiveObj, "Back").onClick.AddListener(Back);
     }
 

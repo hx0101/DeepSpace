@@ -13,6 +13,7 @@ public class Roomlist : MonoBehaviourPunCallbacks
     public Image content;
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("RoomListOne");
         if (transform != null)
         {
@@ -22,13 +23,18 @@ public class Roomlist : MonoBehaviourPunCallbacks
             }
         }
         
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            if (roomList[i].PlayerCount == 0)
+            {
+                roomList.Remove(roomList[i]);
+                continue;
+            }
+        }
+        Debug.Log(roomList.Count);
         int count = -1;
         foreach (var room in roomList)
         {
-            if (room.PlayerCount == 0)
-            {
-                roomList.Remove(room);
-            }
             count++;
             GameObject newRoom = Instantiate(roomNamePrefab, roomNamePrefab.transform.position, Quaternion.identity); 
             newRoom.name = room.Name;

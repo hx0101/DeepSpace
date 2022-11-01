@@ -27,7 +27,7 @@ public class AudioManager : Singleton<AudioManager>
     AudioSource fxSorce;
     AudioSource playerSource;
     AudioSource voiceSource;
-    private void Awake()
+    protected override void Awake()
     {
         current = this;
 

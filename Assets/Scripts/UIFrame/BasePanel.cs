@@ -24,7 +24,15 @@ public class BasePanel
             if (GameObject.FindWithTag("Player"))
             {
                 Time.timeScale = 0;
-                GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+                {
+                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+                }
+                else
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
+                }
+                
             }
         }
         else
@@ -32,7 +40,14 @@ public class BasePanel
             if (GameObject.FindWithTag("Player"))
             {
                 Time.timeScale = 1;
-                GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+                {
+                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+                }
+                else
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
+                }
             }
         }
     }
@@ -45,7 +60,14 @@ public class BasePanel
             if (GameObject.FindWithTag("Player"))
             {
                 Time.timeScale = 0;
-                GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+                {
+                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+                }
+                else
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
+                }
             }
         }
         else
@@ -53,7 +75,14 @@ public class BasePanel
             if (GameObject.FindWithTag("Player"))
             {
                 Time.timeScale = 1;
-                GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+                {
+                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+                }
+                else
+                {
+                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
+                }
             }
         }
     }

@@ -18,6 +18,8 @@ TagManager:
   - Co-range
   - NetworkLauncher
   - RoomListOne
+  - MainPanel
+  - CinemachineTargetGroup
   layers:
   - Default
   - TransparentFX

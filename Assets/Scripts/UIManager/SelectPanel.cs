@@ -21,6 +21,8 @@ public class SelectPanel : BasePanel
     SelectPanelTransform selectPanelTransform;
 
     Launcher launcher;
+
+    public bool loadGameModel;
     public SelectPanel() : base(uIType)
     {
 
@@ -29,7 +31,12 @@ public class SelectPanel : BasePanel
     public override void OnStart()
     {
         base.OnStart();
+
         selectPanelTransform = GameObject.FindWithTag("SelectPanel").gameObject.GetComponent<SelectPanelTransform>();
+        if (loadGameModel)
+        {
+            selectPanelTransform.StartCoroutine(selectPanelTransform.GameModelEnter());
+        }
 
         launcher = GameObject.FindWithTag("NetworkLauncher").gameObject.GetComponent<Launcher>();
 
@@ -63,7 +70,7 @@ public class SelectPanel : BasePanel
     void Exit()
     {
         StartScene startScene = new StartScene();
-        LoadManager.Instance.LoadNextLevel(startScene.SceneName, startScene);
+        LoadManager.Instance.LoadNextLevel(startScene.SceneName, startScene,true);
     }
 
     void Single()
@@ -104,7 +111,7 @@ public class SelectPanel : BasePanel
     void Difficult()
     {
         HardScene hardScene = new HardScene();
-        LoadManager.Instance.LoadNextLevel(hardScene.SceneName,hardScene);
+        LoadManager.Instance.LoadNextLevel(hardScene.SceneName,hardScene,true);
     }
 
     void Compete()

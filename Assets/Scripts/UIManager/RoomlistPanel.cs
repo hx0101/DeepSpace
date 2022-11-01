@@ -62,8 +62,6 @@ public class RoomlistPanel : BasePanel
         inputText = UIMethod.GetInstance().GetOrAddSingleComponentInChild<TMP_Text>(ActiveObj, "InputText");
         if (inputText.text.Length > 1 && inputText.text.Length < 8)
         {
-            UIManager.GetInstance().Pop(true);
-            UIManager.GetInstance().Push(new LoadingPanel());
             launcher.CreateRoom(inputText.text);
         }
     }

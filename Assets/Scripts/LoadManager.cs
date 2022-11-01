@@ -8,9 +8,9 @@ public class LoadManager : Singleton<LoadManager>
     {
         DontDestroyOnLoad(gameObject);
     }
-    public void LoadNextLevel(string sceneName,SceneBase sceneBase)
+    public void LoadNextLevel(string sceneName,SceneBase sceneBase,bool IsSingle)
     {
-        StartCoroutine(SceneControl.GetInstance().LoadLevel(sceneName, sceneBase, new LoadPanel()));
+        StartCoroutine(SceneControl.GetInstance().LoadLevel(sceneName, sceneBase, new LoadPanel(), IsSingle));
     }
 
     public void LoadNextPanel(BasePanel basePanel)

@@ -7,7 +7,7 @@ public class FirstUIPanel : MonoBehaviour
     public void StartGame()
     {
         GameSelect gameSelect = new GameSelect();
-        LoadManager.Instance.LoadNextLevel(gameSelect.SceneName, gameSelect);
+        LoadManager.Instance.LoadNextLevel(gameSelect.SceneName, gameSelect,true);
     }
 
     public void ExitGame()

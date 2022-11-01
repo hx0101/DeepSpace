@@ -20,6 +20,10 @@ public class GroundMove : MonoBehaviour
 
     public void MoveGround()
     {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
         ground.transform.position = new Vector3(player.transform.position.x, ground.transform.position.y, player.transform.position.z);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
@@ -11,10 +12,31 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     GameObject selectPanel;
     GameObject roomlistPanel;
+
+    bool IsStartGame;
+    byte eve;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        eve = 0;
+        IsStartGame = false;
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.AutomaticallySyncScene = false;
     }
 
     public void GetCompeteButtonDown()
@@ -32,15 +54,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void CreateRoom(string roomName)
     {
         RoomOptions options = new RoomOptions { MaxPlayers = 5 };
-        foreach (var room in MyList.RoomNames)
+        List<RoomInfo> roomlist = new List<RoomInfo>();
+        foreach (var room in roomlist)
         {
-            if (room == roomName)
+            if (room.Name == roomName)
             {
                 return;
             }
         }
+        UIManager.GetInstance().Pop(true);
+        UIManager.GetInstance().Push(new LoadingPanel());
         PhotonNetwork.CreateRoom(roomName, options, default);
-        MyList.RoomNames.Add(roomName);
     }
 
     public void RefreshList()
@@ -80,7 +104,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LoadLevel()
     {
-        PhotonNetwork.LoadLevel(3);
+        eve = 1;
+        Compete compete = new Compete();
+        LoadManager.Instance.LoadNextLevel(compete.SceneName, compete,false);
     }
 
     public void LeaveRoom()
@@ -104,35 +130,59 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Debug.Log("进入房间");
         base.OnJoinedRoom();
-        
-        switch(PhotonNetwork.CurrentRoom.PlayerCount)
-        {
-            case 1:
-                break;
-            case 2:
-                PhotonNetwork.Instantiate("Player", new Vector3(-3, 1.09f, 0), Quaternion.identity, 0);
-                break;
-            case 3:
-                PhotonNetwork.Instantiate("Player", new Vector3(3, 1.09f, 0), Quaternion.identity, 0);
-                break;
-            case 4:
-                PhotonNetwork.Instantiate("Player", new Vector3(-6, 1.09f, 0), Quaternion.identity, 0);
-                break;
-            case 5:
-                PhotonNetwork.Instantiate("Player", new Vector3(6, 1.09f, 0), Quaternion.identity, 0);
-                break;
-        }
 
-        UIManager.GetInstance().Pop(true);
-        UIManager.GetInstance().Push(new CompetePanel());
+        if(!IsStartGame)
+        {
+            switch (PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                case 1:
+                    break;
+                case 2:
+                    PhotonNetwork.Instantiate("Player", new Vector3(-3, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 3:
+                    PhotonNetwork.Instantiate("Player", new Vector3(3, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 4:
+                    PhotonNetwork.Instantiate("Player", new Vector3(-6, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 5:
+                    PhotonNetwork.Instantiate("Player", new Vector3(6, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+            }
+
+            UIManager.GetInstance().Pop(true);
+            UIManager.GetInstance().Push(new CompetePanel());
+        }    
     }
 
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
         UIManager.GetInstance().Pop(true);
-        UIManager.GetInstance().Push(new SelectPanel());
+        SelectPanel selectPanel = new SelectPanel();
+        selectPanel.loadGameModel = false;
+        UIManager.GetInstance().Push(selectPanel);
         UIManager.GetInstance().Push(new RoomlistPanel());
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.RaiseEvent(eve, new byte[] { }, null, ExitGames.Client.Photon.SendOptions.SendReliable);
+        }
+    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        Debug.Log(photonEvent.Code);
+        if (photonEvent.Code == 1)
+        {
+            IsStartGame = true;
+        }
     }
 }

@@ -33,8 +33,6 @@ public class SelectPanelTransform : MonoBehaviour
         compete.GetComponent<Image>().enabled = false;
         cooperate.GetComponent<Button>().enabled = false;
         compete.GetComponent<Image>().enabled = false;
-
-        StartCoroutine(GameModelEnter());
     }
 
     // Update is called once per frame
@@ -43,7 +41,7 @@ public class SelectPanelTransform : MonoBehaviour
         
     }
 
-    IEnumerator GameModelEnter()
+    public IEnumerator GameModelEnter()
     {
         yield return new WaitForSeconds(0.4f);
         single.GetComponent<Button>().enabled = true;
