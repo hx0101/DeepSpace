@@ -6,7 +6,9 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
-public class Launcher : MonoBehaviourPunCallbacks
+
+
+public class Launcher : MonoBehaviourPunCallbacks,IOnEventCallback
 {
     public GameObject roomNamePrefab;
 
@@ -36,7 +38,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void OnDisable()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
     public void GetCompeteButtonDown()
@@ -131,31 +133,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("进入房间");
-        base.OnJoinedRoom();
-
-        if(!IsStartGame)
+        if (PhotonNetwork.IsMasterClient)
         {
-            switch (PhotonNetwork.CurrentRoom.PlayerCount)
-            {
-                case 1:
-                    break;
-                case 2:
-                    PhotonNetwork.Instantiate("Player", new Vector3(-3, 1.09f, 0), Quaternion.identity, 0);
-                    break;
-                case 3:
-                    PhotonNetwork.Instantiate("Player", new Vector3(3, 1.09f, 0), Quaternion.identity, 0);
-                    break;
-                case 4:
-                    PhotonNetwork.Instantiate("Player", new Vector3(-6, 1.09f, 0), Quaternion.identity, 0);
-                    break;
-                case 5:
-                    PhotonNetwork.Instantiate("Player", new Vector3(6, 1.09f, 0), Quaternion.identity, 0);
-                    break;
-            }
-
             UIManager.GetInstance().Pop(true);
             UIManager.GetInstance().Push(new CompetePanel());
-        }    
+        }
+        base.OnJoinedRoom();
     }
 
     public override void OnLeftRoom()
@@ -171,18 +154,41 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
+        
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.RaiseEvent(eve, new byte[] { }, null, ExitGames.Client.Photon.SendOptions.SendReliable);
+            Debug.Log("   ");
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            PhotonNetwork.RaiseEvent(eve, new byte[] { }, raiseEventOptions, SendOptions.SendReliable);
         }
     }
 
     public void OnEvent(EventData photonEvent)
     {
         Debug.Log(photonEvent.Code);
-        if (photonEvent.Code == 1)
+        if (photonEvent.Code == 1 && PhotonNetwork.InRoom)
         {
-            IsStartGame = true;
+            UIManager.GetInstance().Pop(true);
+        }
+        else if (photonEvent.Code == 0 && PhotonNetwork.InRoom)
+        {
+            switch (PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                case 2:
+                    PhotonNetwork.Instantiate("Player", new Vector3(-3, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 3:
+                    PhotonNetwork.Instantiate("Player", new Vector3(3, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 4:
+                    PhotonNetwork.Instantiate("Player", new Vector3(-6, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+                case 5:
+                    PhotonNetwork.Instantiate("Player", new Vector3(6, 1.09f, 0), Quaternion.identity, 0);
+                    break;
+            }
+            UIManager.GetInstance().Pop(true);
+            UIManager.GetInstance().Push(new CompetePanel());
         }
     }
 }

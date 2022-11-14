@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Compete.unity
     guid: 6f6df978c68160c4bae45d0362c9a670
+  - enabled: 1
+    path: Assets/Scenes/SimpleScene.unity
+    guid: 776f470cff13377469d8885b8a258f9e
+  - enabled: 1
+    path: Assets/Scenes/NormalScene.unity
+    guid: 992183e0220567f42bc1b63dc2688615
   m_configObjects: {}

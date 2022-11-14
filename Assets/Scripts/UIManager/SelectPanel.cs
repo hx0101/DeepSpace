@@ -64,7 +64,7 @@ public class SelectPanel : BasePanel
     void User()
     {
         //弹出User面板
-        Debug.Log("弹出User面板");
+        UIManager.GetInstance().Push(new UserLogonOrLoginPanel());
     }
 
     void Exit()
@@ -100,12 +100,14 @@ public class SelectPanel : BasePanel
 
     void Simple()
     {
-
+        SimpleScene simpleScene = new SimpleScene();
+        LoadManager.Instance.LoadNextLevel(simpleScene.SceneName, simpleScene, true);
     }
 
     void Normal()
     {
-
+        NormalScene normalScene = new NormalScene();
+        LoadManager.Instance.LoadNextLevel(normalScene.SceneName, normalScene, true);
     }
 
     void Difficult()
@@ -125,20 +127,34 @@ public class SelectPanel : BasePanel
         {
             selectPanelTransform.AOrTogetherExitGet();
         }
-        selectPanelTransform.StartCoroutine(LoadRoomlistPanel());
+        selectPanelTransform.StartCoroutine(LoadCompeteRoomlistPanel());
     }
 
     void Cooperate()
     {
-
+        if (simple.enabled)
+        {
+            selectPanelTransform.DifficultyExitGet();
+        }
+        else
+        {
+            selectPanelTransform.AOrTogetherExitGet();
+        }
+        selectPanelTransform.StartCoroutine(LoadCooperateRoomlistPanel());
     }
 
-    IEnumerator LoadRoomlistPanel()
+    IEnumerator LoadCompeteRoomlistPanel()
     {
         yield return new WaitForSeconds(0.8f);
         UIManager.GetInstance().Push(new RoomlistPanel());
         yield return new WaitForSeconds(0.1f);
         launcher.PlayerEnterLobby();
+    }
+
+    IEnumerator LoadCooperateRoomlistPanel()
+    {
+        yield return new WaitForSeconds(0.8f);
+        UIManager.GetInstance().Push(new RoomlistCooperatePanel());
     }
 
     public override void OnEnable()

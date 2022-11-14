@@ -19,72 +19,72 @@ public class BasePanel
     public virtual void OnStart()
     {
         UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiveObj).interactable = true;
-        if (UIManager.GetInstance().stack_ui.Count >= 2)
-        {
-            if (GameObject.FindWithTag("Player"))
-            {
-                Time.timeScale = 0;
-                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
-                {
-                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
-                }
-                else
-                {
-                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
-                }
+        //if (UIManager.GetInstance().stack_ui.Count >= 2)
+        //{
+        //    if (GameObject.FindWithTag("Player"))
+        //    {
+        //        Time.timeScale = 0;
+        //        if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+        //        }
+        //        else
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
+        //        }
                 
-            }
-        }
-        else
-        {
-            if (GameObject.FindWithTag("Player"))
-            {
-                Time.timeScale = 1;
-                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
-                {
-                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
-                }
-                else
-                {
-                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
-                }
-            }
-        }
+        //    }
+        //}
+        //else
+        //{
+        //    if (GameObject.FindWithTag("Player"))
+        //    {
+        //        Time.timeScale = 1;
+        //        if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+        //        }
+        //        else
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
+        //        }
+        //    }
+        //}
     }
 
     public virtual void OnEnable()
     {
         UIMethod.GetInstance().AddOrGetComponent<CanvasGroup>(ActiveObj).interactable = true;
-        if (UIManager.GetInstance().stack_ui.Count >= 2)
-        {
-            if (GameObject.FindWithTag("Player"))
-            {
-                Time.timeScale = 0;
-                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
-                {
-                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
-                }
-                else
-                {
-                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
-                }
-            }
-        }
-        else
-        {
-            if (GameObject.FindWithTag("Player"))
-            {
-                Time.timeScale = 1;
-                if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
-                {
-                    GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
-                }
-                else
-                {
-                    GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
-                }
-            }
-        }
+        //if (UIManager.GetInstance().stack_ui.Count >= 2)
+        //{
+        //    if (GameObject.FindWithTag("Player"))
+        //    {
+        //        Time.timeScale = 0;
+        //        if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = false;
+        //        }
+        //        else
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = false;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    if (GameObject.FindWithTag("Player"))
+        //    {
+        //        Time.timeScale = 1;
+        //        if (GameObject.FindWithTag("Player").GetComponent<PlayerControll>())
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<PlayerControll>().enabled = true;
+        //        }
+        //        else
+        //        {
+        //            GameObject.FindWithTag("Player").GetComponent<CompetePlayerController>().enabled = true;
+        //        }
+        //    }
+        //}
     }
 
     public virtual void OnUpdate()

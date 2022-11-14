@@ -32,6 +32,11 @@ public class CubeManager : MonoBehaviour
 
     public void CheckPlayerOnLastCube()
     {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
         if (player.transform.position == (lastSecondCube.transform.position + new Vector3(0, player.transform.position.y, 0))
             && CubeTransform.Count < 99)
         {

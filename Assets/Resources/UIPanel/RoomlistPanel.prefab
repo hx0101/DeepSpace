@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.4
-  m_fontSizeBase: 100.4
+  m_fontSize: 82
+  m_fontSizeBase: 82
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 41
+  m_fontSizeMax: 82
   m_fontStyle: 0
   m_HorizontalAlignment: 32
   m_VerticalAlignment: 512
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 100.4
+  m_GlobalPointSize: 82
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -1058,12 +1058,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.4
-  m_fontSizeBase: 100.4
+  m_fontSize: 82
+  m_fontSizeBase: 82
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 41
+  m_fontSizeMax: 82
   m_fontStyle: 2
   m_HorizontalAlignment: 32
   m_VerticalAlignment: 512
@@ -1289,9 +1289,9 @@ MonoBehaviour:
   m_fontSize: 80
   m_fontSizeBase: 80
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 40
+  m_fontSizeMax: 80
   m_fontStyle: 1
   m_HorizontalAlignment: 32
   m_VerticalAlignment: 1024
@@ -1423,9 +1423,9 @@ MonoBehaviour:
   m_fontSize: 84.53
   m_fontSizeBase: 84.53
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 42.25
+  m_fontSizeMax: 84.53
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1557,9 +1557,9 @@ MonoBehaviour:
   m_fontSize: 84.53
   m_fontSizeBase: 84.53
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 42.25
+  m_fontSizeMax: 84.53
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

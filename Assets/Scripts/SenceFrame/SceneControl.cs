@@ -58,6 +58,7 @@ public class SceneControl
 
     public IEnumerator LoadLevel(string scene_name, SceneBase sceneBase, BasePanel basePanel,bool IsSingel)
     {
+        UIMethod.GetInstance().FindCanvas().gameObject.GetComponent<Image>().enabled = true;
         if (!dict_scene.ContainsKey(scene_name))
         {
             dict_scene.Add(scene_name, sceneBase);
